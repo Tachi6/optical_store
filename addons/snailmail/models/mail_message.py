@@ -11,7 +11,7 @@ class Message(models.Model):
     letter_ids = fields.One2many(comodel_name='snailmail.letter', inverse_name='message_id')
     message_type = fields.Selection(
         selection_add=[('snailmail', 'Snailmail')],
-        ondelete={'snailmail': lambda recs: recs.write({'message_type': ' comment'})})
+        ondelete={'snailmail': lambda recs: recs.write({'message_type': 'comment'})})
 
     @api.depends('letter_ids', 'letter_ids.state')
     def _compute_snailmail_error(self):

@@ -1,0 +1,115 @@
+<odoo>
+    <!-- Tree (List) View -->
+    <record id="view_optical_visit_tree" model="ir.ui.view">
+        <field name="name">optical.visit.tree</field>
+        <field name="model">optical.visit</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" readonly="1"/>
+                <field name="patient_id"/>
+                <field name="visit_datetime"/>
+                <field name="optometrist_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <!-- Form View -->
+    <record id="view_optical_visit_form" model="ir.ui.view">
+        <field name="name">optical.visit.form</field>
+        <field name="model">optical.visit</field>
+        <field name="arch" type="xml">
+            <form>
+                <!-- Header with state and buttons -->
+                <header>
+                    <button name="action_confirm"
+                            type="object"
+                            string="Confirmar"
+                            class="btn-primary"/>
+                    <button name="action_complete"
+                            type="object"
+                            string="Completar"
+                            class="btn-success"/>
+                    <button name="action_reset"
+                            type="object"
+                            string="Resetear a borrador"
+                            class="btn-warning"/>
+                    <field name="state" widget="statusbar"
+                            statusbar_visible="draft,confirmed,completed"/>
+                </header>
+                <!-- Sections -->
+                <sheet>
+                    <!-- Visit Information -->
+                    <separator string="Visit Information"/>
+                    <group>
+                        <field name="patient_id"/>
+                        <field name="visit_datetime"/>
+                        <field name="optometrist_id"/>
+                    </group>
+                    <!-- Prescription -->
+                    <separator string="Prescription"/>
+                    <group>
+                        <group string="Right Eye (OD)" class="px-3">
+                            <field name="od_sphere" widget='add_plus_symbol'/>
+                            <field name="od_cylinder" widget='add_plus_symbol'/>
+                            <field name="od_axis" widget='add_degree_symbol'/>
+                            <field name="od_addition" widget='add_plus_symbol'/>
+                        </group>
+                        <group string="Left Eye (OS)" class="px-3">
+                            <field name="os_sphere" widget='add_plus_symbol'/>
+                            <field name="os_cylinder" widget='add_plus_symbol'/>
+                            <field name="os_axis" widget='add_degree_symbol'/>
+                            <field name="os_addition" widget='add_plus_symbol'/>
+                        </group>
+                    </group>
+                    <!-- Notes -->
+                    <group string="Notes">
+                        <field name="notes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Search View -->
+    <record id="view_optical_visit_search" model="ir.ui.view">
+        <field name="name">optical.visit.search</field>
+        <field name="model">optical.visit</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- Search fields -->
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="optometrist_id"/>
+                <!-- Filters -->
+                <filter string="Draft"
+                        name="filter_draft"
+                        domain="[('state','=','draft')]"/>
+                <filter string="Confirmed"
+                        name="filter_confirmed"
+                        domain="[('state','=','confirmed')]"/>
+                <filter string="Completed"
+                        name="filter_completed"
+                        domain="[('state','=','completed')]"/>
+                <filter string="Visits Today"
+                        name="filter_today"
+                        domain="[('visit_datetime','&gt;=', context_today()),
+                                ('visit_datetime','&lt;', (context_today() + relativedelta(days=1)))]"/>
+                <!-- Group by -->
+                <group expand="0" string="Group By">
+                    <filter string="Optometrist"
+                            name="group_by_optometrist"
+                            context="{'group_by':'optometrist_id'}"/>
+                    <filter string="State"
+                            name="group_by_state"
+                            context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <!-- Action to open Optical Visits -->
+    <record id="action_optical_visit" model="ir.actions.act_window">
+        <field name="name">Visits</field>
+        <field name="res_model">optical.visit</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_optical_visit_search"/>
+    </record>
+</odoo>

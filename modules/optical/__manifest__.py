@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Visita",
+    'name': "Optometry Visits",
 
-    'summary': "Gestor de visitas Optométricas",
+    'summary': "Manage optometry visits",
 
     'description': """
-Visita optométrica detallada.
+Create and manage optometry visits. Includes refraction.
     """,
 
     'author': "David Gonzalez",
-    'website': "https://www.yourcompany.com",
+    # 'website': "https://www.yourcompany.com",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
@@ -20,10 +20,21 @@ Visita optométrica detallada.
     # any module necessary for this one to work correctly
     'depends': ['base', 'contacts'],
 
+    # assets
+    'assets': {
+        'web.assets_backend': [
+            'optical/static/src/js/add_plus_symbol_widget.js',
+            'optical/static/src/js/add_degree_symbol_widget.js',
+        ],
+    },
+
     # always loaded
     'data': [
+        'security/optical_security.xml',
         'security/ir.model.access.csv',
-        'views/views.xml',
+        'data/ir_sequence_data.xml',
+        'views/optical_visit_view.xml',
+        'views/menu.xml',
         #'views/templates.xml',
     ],
     # only loaded in demonstration mode

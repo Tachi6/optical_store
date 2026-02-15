@@ -1,0 +1,19 @@
+<odoo>
+
+    <!-- Top-Level Menu -->
+    <menuitem
+        id="menu_optical_store_root"
+        name="Optical Visits"
+        sequence="20"
+    />
+
+    <!-- Submenu -->
+    <menuitem
+        id="menu_optical_visits"
+        name="Visits"
+        parent="menu_optical_store_root"
+        action="action_optical_visit"
+        sequence="10"
+    />
+
+</odoo>
