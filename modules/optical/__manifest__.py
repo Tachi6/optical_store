@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Optometry Visits",
+    'name': 'Optometry Visits',
 
-    'summary': "Manage optometry visits",
+    'summary': 'Manage optometry visits',
 
-    'description': """
+    'description': '''
 Create and manage optometry visits. Includes refraction.
-    """,
+    ''',
 
-    'author': "David Gonzalez",
-    # 'website': "https://www.yourcompany.com",
+    'author': 'David Gonzalez',
+    # 'website': 'https://www.yourcompany.com',
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
@@ -34,7 +34,7 @@ Create and manage optometry visits. Includes refraction.
         'security/ir.model.access.csv',
         'data/ir_sequence_data.xml',
         'views/optical_visit_view.xml',
-        'views/menu.xml',
+        'views/optical_visit_menu.xml',
         #'views/templates.xml',
     ],
     # only loaded in demonstration mode
