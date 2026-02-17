@@ -14,6 +14,18 @@
                     <button name="action_export_to_csv" string="Export" type="object" class="btn-primary"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
+                <group col="1">
+                    <field 
+                        name="file_sales_orders" 
+                        filename="name_sales_orders" 
+                        invisible="not file_sales_orders"
+                    /> 
+                    <field 
+                        name="file_sales_orders_lines" 
+                        filename="name_sales_orders_lines" 
+                        invisible="not file_sales_orders_lines"
+                    />
+                </group>
             </form>
         </field>
     </record>
