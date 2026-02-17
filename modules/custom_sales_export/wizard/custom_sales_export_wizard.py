@@ -14,10 +14,10 @@ class CustomSalesExportWizard(models.TransientModel):
     date_from = fields.Date(string='Date from', required=True)
     date_to = fields.Date(string='Date to', required=True)
 
-    file_sales_orders = fields.Binary('CSV Sales orders')
-    file_sales_orders_lines = fields.Binary('CSV Sales orders lines')
-    name_sales_orders = fields.Char('CSV Sales orders')
-    name_sales_orders_lines = fields.Char('CSV Sales orders lines')
+    file_sales_orders = fields.Binary('CSV sales orders')
+    name_sales_orders = fields.Char()
+    file_sales_orders_lines = fields.Binary('CSV sales orders lines')
+    name_sales_orders_lines = fields.Char()
 
     def _get_config_path(self):
         return file_path('custom_sales_export/data/a3_counts_config.xlsx')
