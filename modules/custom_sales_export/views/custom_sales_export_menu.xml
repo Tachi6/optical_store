@@ -1,0 +1,15 @@
+<odoo>
+    <record id="action_custom_sales_export" model="ir.actions.act_window">
+        <field name="name">Export to CSV</field>
+        <field name="res_model">custom.sales.export.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field> 
+    </record>
+    <menuitem 
+        id="export_to_csv" 
+        name="Export to CSV" 
+        parent="sale.sale_menu_root"
+        action="action_custom_sales_export"
+        sequence="49"
+    />
+</odoo>

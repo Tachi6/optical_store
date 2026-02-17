@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="custom_sales_export_form" model="ir.ui.view">
+        <field name="name">custom.sales.export.form</field>
+        <field name="model">custom.sales.export.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <p>Select sales date interval.</p>
+                <group>
+                    <field name="date_from"></field>
+                    <field name="date_to"></field>
+                </group>
+                <footer>
+                    <button name="action_export_to_csv" string="Export" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
