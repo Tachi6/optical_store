@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_optical_visit_user,Optical User,model_optical_visit,group_optical_user,1,1,1,0

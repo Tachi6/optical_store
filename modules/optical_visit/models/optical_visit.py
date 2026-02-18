@@ -1,7 +1,6 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
-
-VISITS_STATE = [('draft', 'Borrador'), ('confirmed', 'Confirmado'), ('completed', 'Completado')]
+from ..constants import DIOPTRE_FIELDS, VISITS_STATE
 
 class OpticalVisit(models.Model):
     _name = 'optical.visit'
@@ -16,16 +15,15 @@ class OpticalVisit(models.Model):
     notes = fields.Text(string='Notes')
 
     # Prescription
-    od_sphere = fields.Float(string='Sphere', default=0)
-    od_cylinder = fields.Float(string='Cylinder', default=0)
-    od_axis = fields.Integer(string='Axis', default=0)
-    od_addition = fields.Float(string='Addition', default=0)
-    os_sphere = fields.Float(string='Sphere', default=0)
-    os_cylinder = fields.Float(string='Cylinder', default=0)
-    os_axis = fields.Integer(string='Axis', default=0)
-    os_addition = fields.Float(string='Addition', default=0)
+    od_sphere = fields.Float(string='OD Sphere', default=0)
+    od_cylinder = fields.Float(string='OD Cylinder', default=0)
+    od_axis = fields.Integer(string='OD Axis', default=0)
+    od_addition = fields.Float(string='OD Addition', default=0)
+    os_sphere = fields.Float(string='OS Sphere', default=0)
+    os_cylinder = fields.Float(string='OS Cylinder', default=0)
+    os_axis = fields.Integer(string='OS Axis', default=0)
+    os_addition = fields.Float(string='OS Addition', default=0)
     
-    DIOPTRE_FIELDS = ['od_sphere','os_sphere','od_cylinder','os_cylinder','od_addition','os_addition']
 
     # Actions for change state
     def action_confirm(self):
@@ -39,41 +37,36 @@ class OpticalVisit(models.Model):
     def action_reset(self):
         for record in self:
             record.state = 'draft'
-
-    # Validate axis between 0 and 180 degrees
-    @api.constrains('od_axis', 'os_axis')
-    def _check_axis(self):
-        for record in self:
-            if not (0 <= record.od_axis <= 180) or not (0 <= record.os_axis <= 180):
-                raise ValidationError('Axis must be between 0º and 180º')
-
-    # Validate addition is always positive
-    @api.constrains('od_addition', 'os_addition')
-    def _check_addition(self):
-        for record in self:
-            if record.od_addition < 0 or record.os_addition < 0:
-                raise ValidationError('Addition must be positive.')
     
-    # Create visit reference sequenced
+    # Validations and visit sequences
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
+            # Validate axis between 0 and 180 degrees
+            if not (0 <= vals.get('od_axis', 0) <= 180) or not (0 <= vals.get('os_axis', 0) <= 180):
+                raise ValidationError('Axis must be between 0º and 180º')
+            
+            # Validate addition is always positive
+            if vals.get('od_addition', 0) < 0 or vals.get('os_addition', 0) < 0:
+                raise ValidationError('Addition must be positive.')
+
+            # Create visit reference sequenced
             if not vals.get('name') or vals.get('name') == 'New':
                 vals['name'] = self.env['ir.sequence'].next_by_code('optical.visit')
 
         return super().create(vals_list)
 
-    # Change dioptres in 0.25 multiples
+    # Change dioptres to 0.25 multiples
     @api.onchange(*DIOPTRE_FIELDS)
     def _revise_dioptres(self):
-        for field in self.DIOPTRE_FIELDS:
+        for field in DIOPTRE_FIELDS:
             value = getattr(self, field)
             if value % 0.25 != 0:
                 setattr(self, field, round(value * 4) / 4)
         
     # Write in DB (not via web) dioptres with 0.25 multiples
     def write(self, vals):
-        for field in self.DIOPTRE_FIELDS:
+        for field in DIOPTRE_FIELDS:
             if field in vals and vals[field] % 0.25 != 0:
                 vals[field] = round(vals[field] * 4) / 4
         return super().write(vals)

@@ -1,5 +1,7 @@
-import { FloatField, floatField } from '@web/views/fields/float/float_field';
+/** @odoo-module **/
+
 import { registry } from '@web/core/registry';
+import { FloatField, floatField } from '@web/views/fields/float/float_field';
 
 export class AddPlusSymbolWidget extends FloatField {
   get formattedValue() {
