@@ -13,6 +13,7 @@
                 <group col="1">
                     <field name="name_sales_orders" invisible="True"/>
                     <field name="name_sales_orders_lines" invisible="True"/>
+                    <!-- Invisible separated to hide only csv cleared, not both -->
                     <field 
                         name="file_sales_orders" 
                         filename="name_sales_orders" 

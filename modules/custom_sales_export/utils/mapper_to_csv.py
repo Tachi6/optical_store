@@ -6,7 +6,6 @@ class MapperToCsv:
         self.sales_orders_csv = self._create_sales_order_csv()
         self.sales_orders_lines_csv = self._create_sales_order_lines_csv()
 
-
     def _get_client_code(self, company_id):
         # If store_id(company_id) don't exist I use store 9 because seems to be generic store
         count_config = self.config_data.counts.get(company_id) or self.config_data.counts.get(9)
@@ -17,7 +16,6 @@ class MapperToCsv:
 
         # If isn't unic account, return base account because i don't have privileges to create accounts
         return self.config_data.counts.get(9).CON_ClientsUnicCuenta
-
 
     def _get_product_family(self, company_id, product_family):
         # If store_id(company_id) don't exist I use store 9 because seems to be generic store
@@ -40,7 +38,6 @@ class MapperToCsv:
             'revenue_account_code': family_line.CONV_Mask
         }
 
-
     def _create_sales_order_csv(self):
         csv_data = []
         for sale in self.sales_data:
@@ -60,7 +57,6 @@ class MapperToCsv:
             csv_data.append(row)
 
         return csv_data
-
 
     def _create_sales_order_lines_csv(self):
         csv_data = []
