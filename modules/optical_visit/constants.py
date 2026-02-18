@@ -1,6 +1,8 @@
 VISITS_STATE = [('draft', 'Borrador'), ('confirmed', 'Confirmado'), ('completed', 'Completado')]
 
+
 STATES = [state[0] for state in VISITS_STATE]
+
 
 FIELDS = [
     'patient_id',
@@ -18,6 +20,7 @@ FIELDS = [
     'os_addition',
 ]
 
+
 DIOPTRE_FIELDS = [
     'od_sphere',
     'os_sphere',
@@ -28,6 +31,7 @@ DIOPTRE_FIELDS = [
     'od_axis',
     'os_axis',
 ]
+
 
 BASIC_FIELDS = [
     'patient_id',

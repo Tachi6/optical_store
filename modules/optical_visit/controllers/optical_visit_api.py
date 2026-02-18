@@ -6,6 +6,7 @@ from ..constants import BASIC_FIELDS, DIOPTRE_FIELDS
 from ..utils.recorset_for_db import RecorsetForDB
 from ..utils.api_validations import CreateNewRegister
 
+
 class OpticalAPI(http.Controller):
     # Validate token
     def _check_auth(self):

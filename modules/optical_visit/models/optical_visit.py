@@ -2,10 +2,12 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 from ..constants import DIOPTRE_FIELDS, VISITS_STATE
 
+
 class OpticalVisit(models.Model):
     _name = 'optical.visit'
     _description = 'Optometry visits list'
 
+    # Basic fields
     name = fields.Char(string='Visit reference', required=True, copy=False, default='New')
     patient_id = fields.Many2one('res.partner', string='Patient', required=True)
     visit_datetime = fields.Datetime(string='Visit date', required=True, default=fields.Datetime.now)
@@ -22,8 +24,7 @@ class OpticalVisit(models.Model):
     os_sphere = fields.Float(string='OS Sphere', default=0)
     os_cylinder = fields.Float(string='OS Cylinder', default=0)
     os_axis = fields.Integer(string='OS Axis', default=0)
-    os_addition = fields.Float(string='OS Addition', default=0)
-    
+    os_addition = fields.Float(string='OS Addition', default=0)    
 
     # Actions for change state
     def action_confirm(self):
@@ -63,11 +64,4 @@ class OpticalVisit(models.Model):
             value = getattr(self, field)
             if value % 0.25 != 0:
                 setattr(self, field, round(value * 4) / 4)
-        
-    # Write in DB (not via web) dioptres with 0.25 multiples
-    def write(self, vals):
-        for field in DIOPTRE_FIELDS:
-            if field in vals and vals[field] % 0.25 != 0:
-                vals[field] = round(vals[field] * 4) / 4
-        return super().write(vals)
         
