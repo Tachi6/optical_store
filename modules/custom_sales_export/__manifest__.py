@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     'name': 'Custom Sales Export',
     'version': '17.0.1.0.0',
