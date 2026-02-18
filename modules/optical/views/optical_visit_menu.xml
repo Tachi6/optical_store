@@ -1,13 +1,11 @@
 <odoo>
-
-    <!-- Top-Level Menu -->
+    <!-- App selector Menu -->
     <menuitem
         id="menu_optical_store_root"
         name="Optical Visits"
         sequence="20"
     />
-
-    <!-- Submenu -->
+    <!-- Topbar item -->
     <menuitem
         id="menu_optical_visits"
         name="Visits"
@@ -15,5 +13,4 @@
         action="action_optical_visit"
         sequence="10"
     />
-
 </odoo>
