@@ -1,4 +1,4 @@
-VISITS_STATE = [('draft', 'Borrador'), ('confirmed', 'Confirmado'), ('completed', 'Completado')]
+VISITS_STATE = [('draft', 'Draft'), ('confirmed', 'Confirmed'), ('completed', 'Completed')]
 
 
 STATES = [state[0] for state in VISITS_STATE]

@@ -23,15 +23,15 @@
                 <header>
                     <button name="action_confirm"
                             type="object"
-                            string="Confirmar"
+                            string="Confirm"
                             class="btn-primary"/>
                     <button name="action_complete"
                             type="object"
-                            string="Completar"
+                            string="Complete"
                             class="btn-success"/>
                     <button name="action_reset"
                             type="object"
-                            string="Resetear a borrador"
+                            string="Reset to Draft"
                             class="btn-warning"/>
                     <field name="state" widget="statusbar"
                             statusbar_visible="draft,confirmed,completed"/>
