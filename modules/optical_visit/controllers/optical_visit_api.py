@@ -4,7 +4,7 @@ from odoo.tools import date_utils
 import json
 from ..constants import BASIC_FIELDS, DIOPTRE_FIELDS
 from ..utils.recorset_for_db import RecorsetForDB
-from ..utils.api_validations import CreateNewRegister
+from ..utils.create_new_register import CreateNewRegister
 
 
 class OpticalAPI(http.Controller):
