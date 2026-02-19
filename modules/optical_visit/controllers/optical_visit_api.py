@@ -33,9 +33,13 @@ class OpticalAPI(http.Controller):
         except exceptions.AccessDenied:
             return self.json_response({'error': "Invalid or missing token"}, status=401)
         
-        # Read raw data
+        # Read raw data and validation that is an dict
         raw_data = request.httprequest.data
         data = json.loads(raw_data) if raw_data else {}
+
+        if not isinstance(data, dict):
+            return self.json_response({'error': 'Invalid JSON format'}, status=400)
+
 
         # Create recordset for read DB
         recorset_for_db = RecorsetForDB(kwargs, data)
