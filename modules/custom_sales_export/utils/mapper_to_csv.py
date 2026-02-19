@@ -17,13 +17,13 @@ class MapperToCsv:
         # If isn't unic account, return base account because i don't have privileges to create accounts
         return self.config_data.counts.get(9).CON_ClientsUnicCuenta
 
-    def _get_product_family(self, company_id, product_family):
+    def _get_product_family(self, company_id, category_id):
         # If store_id(company_id) don't exist I use store 9 because seems to be generic store
         count_config = self.config_data.counts.get(company_id) or self.config_data.counts.get(9)
         family_config = self.config_data.counts_values.get(company_id) or self.config_data.counts_values.get(9)
         # If product_family don't exist i use product_id 14 because seems to be generic product
         # I use product_id because name is an inconsistent field (OTROS, OTROS ALCALDE ,...)
-        family_line = family_config.get(product_family) or family_config.get(14)
+        family_line = family_config.get(category_id) or family_config.get(14)
 
         # If store_id exist in excel return CON_FamUnicCuenta and family label
         if count_config.CON_FamUnic.upper() == 'S':
